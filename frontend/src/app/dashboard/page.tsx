@@ -1,4 +1,6 @@
-import { useProjects } from "../features/projects/hooks/useProjects";
+'use client';
+
+import { useProjects } from "@/app/features/projects/hooks/useProjects";
 
 export default function DashboardPage() {
   const { projects, loading, error, addProject } = useProjects();
@@ -26,3 +28,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+

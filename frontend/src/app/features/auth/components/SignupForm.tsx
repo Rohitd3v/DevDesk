@@ -1,20 +1,21 @@
-"use client"
+"use client";
+
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { useLogin } from "../hooks/useLogin";
+import { useSignup } from "../hooks/useSignup";
 
-export const LoginForm = () => {
+export const SignupForm = () => {
   const router = useRouter();
-  const { login, loading, error } = useLogin();
+  const { signup, loading, error } = useSignup();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await login(formData.email, formData.password);
-      router.push("/dashboard");
+      await signup(formData.email, formData.password);
+      router.push("/login");
     } catch {
-      // error is already set inside the hook
+
     }
   };
 
@@ -43,10 +44,10 @@ export const LoginForm = () => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 disabled:opacity-50"
+        className="w-full bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 disabled:opacity-50"
       >
-        {loading ? "Logging in..." : "Login"}
+        {loading ? "Signing up..." : "Sign Up"}
       </button>
     </form>
-  );
-};
+  )
+}

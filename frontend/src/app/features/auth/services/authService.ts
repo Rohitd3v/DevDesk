@@ -22,7 +22,6 @@ export const logout = () => {
   localStorage.removeItem("user");
 };
 
-// 🔹 instead of /auth/me, we read from localStorage
 export const getStoredUser = () => {
   const raw = localStorage.getItem("user");
   return raw ? JSON.parse(raw) : null;
