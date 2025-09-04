@@ -20,6 +20,5 @@ export const useLogin = () => {
       setLoading(false);
     }
   };
-
   return { login: handleLogin, loading, error };
 };
