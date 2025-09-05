@@ -1,4 +1,3 @@
-
 import apiClient from "@/app/services/apiClient";
 
 export const signup = async (email: string, password: string) => {
@@ -20,6 +19,8 @@ export const login = async (email: string, password: string) => {
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+  document.cookie = "token=; Max-Age=0; path=/;";
+  window.location.href = "/login";
 };
 
 export const getStoredUser = () => {

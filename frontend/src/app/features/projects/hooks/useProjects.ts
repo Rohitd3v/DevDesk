@@ -1,6 +1,9 @@
-
 import { useEffect, useState } from "react";
-import { getProjects, createProject, updateProject } from "../services/projectService";
+import {
+  getProjects,
+  createProject,
+  updateProject,
+} from "../services/projectService";
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<any[]>([]);
@@ -25,7 +28,10 @@ export const useProjects = () => {
     await fetchProjects(); // refresh
   };
 
-  const editProject = async (id: string, project: { name: string; description: string }) => {
+  const editProject = async (
+    id: string,
+    project: { name: string; description: string },
+  ) => {
     await updateProject(id, project);
     await fetchProjects();
   };

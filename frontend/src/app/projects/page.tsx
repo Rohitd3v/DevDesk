@@ -9,7 +9,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Projects</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Projects</h1>
 
       <NewProjectForm onCreate={addProject} />
 

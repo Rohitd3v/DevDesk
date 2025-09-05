@@ -35,7 +35,7 @@ export const NewProjectForm = ({ onCreate }: NewProjectFormProps) => {
         placeholder="Project Name"
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        className="w-full px-3 py-2 border rounded-xl"
+        className="w-full px-3 py-2 border rounded-xl text-black"
         required
       />
 
@@ -45,7 +45,7 @@ export const NewProjectForm = ({ onCreate }: NewProjectFormProps) => {
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
         }
-        className="w-full px-3 py-2 border rounded-xl"
+        className="w-full px-3 py-2 border rounded-xl text-black"
         required
       />
 
