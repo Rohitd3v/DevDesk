@@ -27,7 +27,7 @@ export const NewProjectForm = ({ onCreate }: NewProjectFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 mb-6">
+    <form onSubmit={handleSubmit} className="space-y-3 mb-6 bg-white p-4 rounded-xl border shadow-sm">
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <input

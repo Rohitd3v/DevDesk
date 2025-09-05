@@ -1,9 +1,6 @@
-
 import { supabase } from "../config/supabaseClient.ts";
 
-
 export const TicketService = {
-
   getProjectById: async (project_id: string, userId: string) => {
     return supabase
       .from("projects")
@@ -14,26 +11,15 @@ export const TicketService = {
   },
 
   createTicket: async (ticket: any) => {
-    return supabase
-      .from("tickets")
-      .insert([ticket])
-      .select("*")
-      .single();
+    return supabase.from("tickets").insert([ticket]).select("*").single();
   },
 
   getTicketsByProject: async (project_id: string) => {
-    return supabase
-      .from("tickets")
-      .select("*")
-      .eq("project_id", project_id);
+    return supabase.from("tickets").select("*").eq("project_id", project_id);
   },
 
   getTicketById: async (ticket_id: string) => {
-    return supabase
-      .from("tickets")
-      .select("*")
-      .eq("id", ticket_id)
-      .single();
+    return supabase.from("tickets").select("*").eq("id", ticket_id).single();
   },
 
   updateTicket: async (ticket_id: string, updateData: any) => {
@@ -52,5 +38,12 @@ export const TicketService = {
       .eq("id", ticket_id)
       .select()
       .single();
+  },
+
+  getAllTicketofuser: async (user_id: string) => {
+    return supabase
+      .from("tickets")
+      .select("*")
+      .or(`assigned_to.eq.${user_id},created_by.eq.${user_id}`);
   },
 };
