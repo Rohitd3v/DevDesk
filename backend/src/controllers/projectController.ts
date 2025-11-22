@@ -23,6 +23,7 @@ export const getProjectsbyId = async (req: AuthenticatedRequest, res: Response) 
   const userId = req.user?.id;
   const projectId = req.params.P_id;
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!projectId) return sendResponse(res, 400, false, { error: "Project ID is required" });
 
   const { data, error } = await ProjectService.getProjectById(projectId, userId);
 
@@ -53,6 +54,7 @@ export const updateProject = async (req: AuthenticatedRequest, res: Response) =>
   const project_id = req.params.P_id;
   const { name, description } = req.body;
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" })
+  if (!project_id) return sendResponse(res, 400, false, { error: "Project ID is required" });
 
   const { data, error } = await ProjectService.updateProject(project_id, userId, name, description);
 
@@ -66,6 +68,7 @@ export const deleteProject = async (req: AuthenticatedRequest, res: Response) =>
   const projectId = req.params.P_id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!projectId) return sendResponse(res, 400, false, { error: "Project ID is required" });
 
   const { error } = await ProjectService.deleteProject(projectId, userId);
 
