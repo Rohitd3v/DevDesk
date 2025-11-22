@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { AxiosError } from "axios";
 
 interface NewTicketFormProps {
   onCreate: (ticket: { title: string; description: string; priority: string }) => Promise<void>;
@@ -18,8 +19,12 @@ export const NewTicketForm = ({ onCreate }: NewTicketFormProps) => {
     try {
       await onCreate(formData);
       setFormData({ title: "", description: "", priority: "medium" });
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to create ticket");
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || "Failed to create ticket");
+      } else if (err instanceof Error) {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }

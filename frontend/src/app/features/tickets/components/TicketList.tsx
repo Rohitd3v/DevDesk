@@ -1,14 +1,7 @@
 "use client";
 
 import { TicketCard } from "./TicketCard";
-
-interface Ticket {
-  id: string;
-  title: string;
-  description: string;
-  status?: string;
-  priority?: string;
-}
+import { Ticket } from "../types";
 
 export const TicketList = ({ tickets }: { tickets: Ticket[] }) => {
   if (!tickets.length) {

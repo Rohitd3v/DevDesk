@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { AxiosError } from "axios";
 
 interface NewProjectFormProps {
   onCreate: (project: { name: string; description: string }) => Promise<void>;
@@ -19,8 +20,12 @@ export const NewProjectForm = ({ onCreate }: NewProjectFormProps) => {
     try {
       await onCreate(formData);
       setFormData({ name: "", description: "" }); // reset form
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to create project");
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || "Failed to create project");
+      } else if (err instanceof Error) {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }

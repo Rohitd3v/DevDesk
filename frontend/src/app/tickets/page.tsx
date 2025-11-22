@@ -58,7 +58,7 @@ export default function TicketsPage() {
               ))}
             </div>
           ) : (
-            <TicketList tickets={tickets as any} />
+            <TicketList tickets={tickets} />
           )}
         </>
       )}
