@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { supabase } from "../config/supabaseClient.ts";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { supabase } from "../config/supabaseClient.js";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 
 
 

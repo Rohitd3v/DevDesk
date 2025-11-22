@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { supabaseAuth } from "../config/supabaseClient.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { supabaseAuth } from "../config/supabaseClient.js";
 
 
 const signUp = async (req: Request, res: Response) => {

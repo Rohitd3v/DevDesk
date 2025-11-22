@@ -1,11 +1,11 @@
 import type { Response } from "express";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
-import { sendResponse } from "../utils/sendResponse.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
+import { sendResponse } from "../utils/sendResponse.js";
 import type {
   TicketCreateBody,
   TicketUpdateBody,
-} from "../types/ticketTypes.ts";
-import { TicketService } from "../services/ticketService.ts";
+} from "../types/ticketTypes.js";
+import { TicketService } from "../services/ticketService.js";
 
 export const TicketController = {
   create: async (req: AuthenticatedRequest, res: Response) => {

@@ -1,7 +1,7 @@
 import { Router } from "express"
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.js";
+import asyncHandler from "../utils/asyncHandler.js";
 const router = Router();
 
 router.get('/', authMiddleware, asyncHandler(getprojectbyUser))
