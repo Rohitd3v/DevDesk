@@ -4,9 +4,17 @@ import {
   createProject,
   updateProject,
 } from "../services/projectService";
+import { AxiosError } from "axios";
+
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+}
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,8 +24,12 @@ export const useProjects = () => {
     try {
       const data = await getProjects();
       setProjects(data.projects);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to load projects");
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || "Failed to load projects");
+      } else if (err instanceof Error) {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }

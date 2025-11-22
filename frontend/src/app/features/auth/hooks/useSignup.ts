@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { signup } from "../services/authService";
+import { AxiosError } from "axios";
 
 export const useSignup = () => {
   const [loading, setLoading] = useState(false);
@@ -13,8 +14,12 @@ export const useSignup = () => {
     try {
       const data = await signup(email, password);
       return data;
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Signup failed");
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || "Signup failed");
+      } else if (err instanceof Error) {
+        setError(err.message);
+      }
       throw err;
     } finally {
       setLoading(false);
