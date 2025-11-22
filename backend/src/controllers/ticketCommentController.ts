@@ -11,6 +11,7 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
   const userId = req.user?.id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketCommentService.createComment(ticket_id, userId, content);
 
@@ -22,6 +23,7 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
 export const getcommentbyticketId = async (req: AuthenticatedRequest, res: Response) => {
 
   const ticket_id = req.params.ticket_id;
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketCommentService.getCommentsByTicketId(ticket_id);
 
@@ -38,6 +40,7 @@ export const getallCommentbyUserId = async (req: AuthenticatedRequest, res: Resp
   const userId = req.user?.id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketCommentService.getCommentsByUserId(ticket_id, userId);
 
@@ -53,6 +56,8 @@ export const DeleteCommentbyId = async (req: AuthenticatedRequest, res: Response
   const { ticket_id, comment_id } = req.params;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
+  if (!comment_id) return sendResponse(res, 400, false, { error: "Comment ID is required" });
 
   const { data, error } = await TicketCommentService.deleteCommentById(comment_id, ticket_id, userId);
 

@@ -46,6 +46,9 @@ export const getProfile = async (_req: Request, res: Response) => {
 
 // Fetch single profile (public route)
 export const getProfilebyId = async (req: Request, res: Response) => {
+  if (!req.params.id) {
+    return res.status(400).json({ success: false, error: "Profile ID is required" });
+  }
   const { data, error } = await ProfileService.getProfileById(req.params.id);
 
   if (error) {
@@ -67,6 +70,10 @@ export const updateProfie = async (req: AuthenticatedRequest, res: Response) => 
 
   if (!userId) {
     return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+
+  if (!profileId) {
+    return res.status(400).json({ success: false, error: "Profile ID is required" });
   }
 
   if (userId !== profileId) {
@@ -93,6 +100,10 @@ export const deleteProfile = async (req: AuthenticatedRequest, res: Response) =>
 
   if (!userId) {
     return res.status(401).json({ success: false, error: "Unauthorized" });
+  }
+  
+  if (!profileId) {
+    return res.status(400).json({ success: false, error: "Profile ID is required" });
   }
 
   if (userId !== profileId) {

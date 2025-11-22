@@ -12,6 +12,7 @@ export const createactivity = async (req: AuthenticatedRequest, res: Response) =
   const userId = req.user?.id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketActivityService.createActivity(ticket_id, userId, action, details);
 
@@ -25,6 +26,7 @@ export const createactivity = async (req: AuthenticatedRequest, res: Response) =
  */
 export const getActivitiesbytId = async (req: AuthenticatedRequest, res: Response) => {
   const { ticket_id } = req.params;
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketActivityService.getActivitiesByTicketId(ticket_id);
 
@@ -42,6 +44,7 @@ export const getAllActivitiesByuser = async (req: AuthenticatedRequest, res: Res
   const userId = req.user?.id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
 
   const { data, error } = await TicketActivityService.getActivitiesByUserId(ticket_id, userId);
 
@@ -59,6 +62,8 @@ export const DelActivitybyId = async (req: AuthenticatedRequest, res: Response) 
   const userId = req.user?.id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
+  if (!ticket_id) return sendResponse(res, 400, false, { error: "Ticket ID is required" });
+  if (!activity_id) return sendResponse(res, 400, false, { error: "Activity ID is required" });
 
   const { data, error } = await TicketActivityService.deleteActivityById(activity_id, ticket_id, userId);
 
