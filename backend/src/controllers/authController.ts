@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { sendResponse } from "../utils/sendResponse.js";
-import { supabaseAuth } from "../config/supabaseClient.js";
+import { AuthService } from "../services/authService.js";
 
 
 const signUp = async (req: Request, res: Response) => {
@@ -9,7 +9,7 @@ const signUp = async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, error: "Email and password are required" });
     }
 
-    const { data, error } = await supabaseAuth.auth.signUp({ email, password });
+    const { data, error } = await AuthService.signUp(email, password);
 
     if (error) return sendResponse(res, 400, false, { error: error.message });
 
@@ -26,7 +26,7 @@ const login = async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, error: "Email and password are required" });
     }
 
-    const { data, error } = await supabaseAuth.auth.signInWithPassword({ email, password });
+    const { data, error } = await AuthService.signIn(email, password);
     if (error) return sendResponse(res, 500, false, { error: error.message });
 
     return res.json({
