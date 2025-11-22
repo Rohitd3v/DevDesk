@@ -2,12 +2,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
-import authRouters from "./routes/authRouter.ts";
-import authProfiles from "./routes/profileRouter.ts";
-import authprojects from "./routes/projectsRouter.ts";
-import ticketsRouter from "./routes/ticketsRouter.ts";
-import ticketcommentsRouter from "./routes/ticketCommentsRouter.ts";
-import ticketActionRouter from "./routes/ticketActivityRouter.ts"
+import authRouters from "./routes/authRouter.js";
+import authProfiles from "./routes/profileRouter.js";
+import authprojects from "./routes/projectsRouter.js";
+import ticketsRouter from "./routes/ticketsRouter.js";
+import ticketcommentsRouter from "./routes/ticketCommentsRouter.js";
+import ticketActionRouter from "./routes/ticketActivityRouter.js";
 dotenv.config();
 const app = express();
 app.use(cors())

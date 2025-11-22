@@ -1,6 +1,6 @@
 import { Router } from "express";
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import { createComment, getcommentbyticketId, getallCommentbyUserId, DeleteCommentbyId, } from "../controllers/ticketCommentController.ts";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import { createComment, getcommentbyticketId, getallCommentbyUserId, DeleteCommentbyId, } from "../controllers/ticketCommentController.js";
 const router = Router();
 
 router.post('/:ticket_id', authMiddleware, createComment)

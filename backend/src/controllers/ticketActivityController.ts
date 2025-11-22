@@ -1,7 +1,7 @@
-import { sendResponse } from "../utils/sendResponse.ts";
-import { supabase } from "../config/supabaseClient.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { supabase } from "../config/supabaseClient.js";
 import type { Response } from "express";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 /**
  * CREATE ticket activity */
 

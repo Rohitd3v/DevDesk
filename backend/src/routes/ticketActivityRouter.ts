@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createactivity, getActivitiesbytId, getAllActivitiesByuser, DelActivitybyId } from "../controllers/ticketActivityController.ts";
-import authMiddleware from "../middleware/Authmiddleware.ts";
+import { createactivity, getActivitiesbytId, getAllActivitiesByuser, DelActivitybyId } from "../controllers/ticketActivityController.js";
+import authMiddleware from "../middleware/Authmiddleware.js";
 
 const router = Router();
 

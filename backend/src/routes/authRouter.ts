@@ -1,9 +1,9 @@
 
-import { login, signUp } from "../controllers/authController.ts";
+import { login, signUp } from "../controllers/authController.js";
 import { Router } from "express";
-import asyncHandler from "../utils/asyncHandler.ts";
-import validateRequest from "../middleware/validateRequest.ts";
-import { signUpSchema, loginSchema } from "../validators/zodValidation.ts";
+import asyncHandler from "../utils/asyncHandler.js";
+import validateRequest from "../middleware/validateRequest.js";
+import { signUpSchema, loginSchema } from "../validators/zodValidation.js";
 
 const router = Router();
 
