@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { sendResponse } from "../utils/sendResponse.js";
-import { supabase } from "../config/supabaseClient.js";
+import { TicketCommentService } from "../services/ticketCommentService.js";
 import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 
 
@@ -10,14 +10,9 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
   const ticket_id = req.params.ticket_id;
   const userId = req.user?.id;
 
-  if (!ticket_id) return sendResponse(res, 400, false, { error: "Invalid ticket id" });
-  if (!content) return sendResponse(res, 400, false, { error: "Comment is required" });
+  if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
 
-  const { data, error } = await supabase
-    .from('ticket_comments')
-    .insert([{ ticket_id, author_id: userId, content }])
-    .select()
-    .single();
+  const { data, error } = await TicketCommentService.createComment(ticket_id, userId, content);
 
   if (error) return sendResponse(res, 500, false, { error: error.message });
   return sendResponse(res, 201, true, { comment: data });
@@ -27,13 +22,8 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
 export const getcommentbyticketId = async (req: AuthenticatedRequest, res: Response) => {
 
   const ticket_id = req.params.ticket_id;
-  if (!ticket_id) return sendResponse(res, 400, false, { error: "Invalid ticket id" });
 
-  const { data, error } = await supabase
-    .from('ticket_comments')
-    .select('*')
-    .eq('ticket_id', ticket_id)
-    .order('created_at', { ascending: true });
+  const { data, error } = await TicketCommentService.getCommentsByTicketId(ticket_id);
 
   if (error) return sendResponse(res, 500, false, { error: error.message });
   if (!data || data.length === 0) return sendResponse(res, 404, false, { message: "No comments found" });
@@ -47,13 +37,9 @@ export const getallCommentbyUserId = async (req: AuthenticatedRequest, res: Resp
   const ticket_id = req.params.ticket_id;
   const userId = req.user?.id;
 
-  if (!ticket_id) return sendResponse(res, 400, false, { error: "Invalid ticket id" });
+  if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
 
-  const { data, error } = await supabase
-    .from('ticket_comments')
-    .select('*')
-    .eq('ticket_id', ticket_id)
-    .eq('author_id', userId);
+  const { data, error } = await TicketCommentService.getCommentsByUserId(ticket_id, userId);
 
   if (error) return sendResponse(res, 500, false, { error: error.message });
   if (!data || data.length === 0) return sendResponse(res, 404, false, { message: "No comments found for this user" });
@@ -66,20 +52,13 @@ export const DeleteCommentbyId = async (req: AuthenticatedRequest, res: Response
   const userId = req.user?.id;
   const { ticket_id, comment_id } = req.params;
 
-  if (!ticket_id) return sendResponse(res, 400, false, { error: "Invalid ticket id" });
-  if (!comment_id) return sendResponse(res, 400, false, { error: "Invalid comment id" });
+  if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
 
-  const { data, error } = await supabase
-    .from('ticket_comments')
-    .delete()
-    .eq('id', comment_id)
-    .eq('ticket_id', ticket_id)
-    .eq('author_id', userId)
-    .select()
-    .single();
+  const { data, error } = await TicketCommentService.deleteCommentById(comment_id, ticket_id, userId);
 
   if (error) return sendResponse(res, 500, false, { error: error.message });
   if (!data) return sendResponse(res, 404, false, { message: "Comment not found or not allowed" });
 
   return sendResponse(res, 200, true, { deleted: data });
 };
+

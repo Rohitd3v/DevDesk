@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { sendResponse } from "../utils/sendResponse.js";
-import { supabase } from "../config/supabaseClient.js";
+import { ProfileService } from "../services/profileService.js";
 import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 
 
@@ -18,21 +18,13 @@ export const CreateProfile = async (req: AuthenticatedRequest, res: Response) =>
     return sendResponse(res, 400, false, { error: "Username is required" });
   }
 
-  const { data: existing } = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("id", userId)
-    .single();
+  const { data: existing } = await ProfileService.getProfileById(userId);
 
   if (existing) {
     return sendResponse(res, 409, false, { error: "Profile already exists" });
   }
 
-  const { data, error } = await supabase
-    .from("profiles")
-    .insert([{ id: userId, username, full_name, avatar_url, role }])
-    .select("id, username, full_name, avatar_url, role")
-    .single();
+  const { data, error } = await ProfileService.createProfile(userId, { username, full_name, avatar_url, role });
 
   if (error) {
     return sendResponse(res, 500, false, { error: error.message });
@@ -43,9 +35,7 @@ export const CreateProfile = async (req: AuthenticatedRequest, res: Response) =>
 
 // Fetch all profiles (public route)
 export const getProfile = async (_req: Request, res: Response) => {
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("id, username, full_name, avatar_url, role");
+  const { data, error } = await ProfileService.getAllProfiles();
 
   if (error) {
     return res.status(500).json({ success: false, error: error.message });
@@ -56,11 +46,7 @@ export const getProfile = async (_req: Request, res: Response) => {
 
 // Fetch single profile (public route)
 export const getProfilebyId = async (req: Request, res: Response) => {
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("id, username, full_name, avatar_url, role")
-    .eq("id", req.params.id)
-    .single();
+  const { data, error } = await ProfileService.getProfileById(req.params.id);
 
   if (error) {
     return res.status(500).json({ success: false, error: error.message });
@@ -87,12 +73,7 @@ export const updateProfie = async (req: AuthenticatedRequest, res: Response) => 
     return res.status(403).json({ success: false, error: "Forbidden: Can only update your own profile" });
   }
 
-  const { data, error } = await supabase
-    .from("profiles")
-    .update({ username, full_name, avatar_url, role })
-    .eq("id", profileId)
-    .select("id, username, full_name, avatar_url, role")
-    .single();
+  const { data, error } = await ProfileService.updateProfile(profileId, { username, full_name, avatar_url, role });
 
   if (error) {
     return res.status(500).json({ success: false, error: error.message });
@@ -118,10 +99,7 @@ export const deleteProfile = async (req: AuthenticatedRequest, res: Response) =>
     return res.status(403).json({ success: false, error: "Forbidden: Can only delete your own profile" });
   }
 
-  const { error } = await supabase
-    .from("profiles")
-    .delete()
-    .eq("id", profileId);
+  const { error } = await ProfileService.deleteProfile(profileId);
 
   if (error) {
     return res.status(500).json({ success: false, error: error.message });
