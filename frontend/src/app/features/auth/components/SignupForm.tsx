@@ -48,6 +48,17 @@ export const SignupForm = () => {
       >
         {loading ? "Signing up..." : "Sign Up"}
       </button>
+
+      <div className="text-center text-sm text-gray-600">
+        Already have an account?{" "}
+        <button
+          type="button"
+          onClick={() => router.push("/login")}
+          className="text-blue-600 hover:underline"
+        >
+          Sign in
+        </button>
+      </div>
     </form>
-  )
-}
+  );
+};
