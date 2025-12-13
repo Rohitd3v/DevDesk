@@ -7,6 +7,7 @@ import { useTickets } from "@/app/features/tickets/hooks/useTickets";
 import { NewTicketForm } from "@/app/features/tickets/components/NewTicketForm";
 import { TicketList } from "@/app/features/tickets/components/TicketList";
 import { getProjectById } from "@/app/features/projects/services/projectService";
+import { RepositoryLinker } from "@/app/features/github/components/RepositoryLinker";
 import Link from "next/link";
 
 interface Project {
@@ -94,6 +95,11 @@ function ProjectDetailContent() {
             Created {new Date(project.created_at).toLocaleDateString()}
           </div>
         </div>
+      </div>
+
+      {/* GitHub Integration Section */}
+      <div className="mb-8">
+        <RepositoryLinker projectId={project.id} />
       </div>
 
       {/* Tickets Section */}

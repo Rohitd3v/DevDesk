@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ProtectedRoute } from "@/app/components/ProtectedRoute";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { ProfileService } from "@/app/features/profiles/services/profileService";
+import { GitHubConnection } from "@/app/features/github/components/GitHubConnection";
 
 interface Profile {
   id: string;
@@ -230,6 +231,12 @@ function ProfileContent() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* GitHub Integration Section */}
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold mb-4">GitHub Integration</h2>
+        <GitHubConnection />
       </div>
     </div>
   );
