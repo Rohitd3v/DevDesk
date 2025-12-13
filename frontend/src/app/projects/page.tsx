@@ -3,12 +3,13 @@
 import { useProjects } from "../features/projects/hooks/useProjects";
 import { ProjectsList } from "../features/projects/components/ProjectsList";
 import { NewProjectForm } from "../features/projects/components/NewProjectForm";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
-export default function ProjectsPage() {
+function ProjectsContent() {
   const { projects, loading, error, addProject } = useProjects();
 
   return (
-    <div className="max-w-3xl mx-auto p-6 text-black">
+    <div className="max-w-4xl mx-auto text-black">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold">Projects</h1>
         <span className="text-sm text-gray-600">{projects.length} total</span>
@@ -26,5 +27,13 @@ export default function ProjectsPage() {
 
       {!loading && <ProjectsList projects={projects} />}
     </div>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <ProtectedRoute>
+      <ProjectsContent />
+    </ProtectedRoute>
   );
 }

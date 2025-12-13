@@ -20,10 +20,15 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   document.cookie = "token=; Max-Age=0; path=/;";
-  window.location.href = "/login";
+  window.location.href = "/";
 };
 
 export const getStoredUser = () => {
-  const raw = localStorage.getItem("user");
-  return raw ? JSON.parse(raw) : null;
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem("user");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 };

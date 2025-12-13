@@ -16,7 +16,7 @@ export const useSignup = () => {
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
-        setError(err.response?.data?.message || "Signup failed");
+        setError(err.response?.data?.error || "Signup failed");
       } else if (err instanceof Error) {
         setError(err.message);
       }

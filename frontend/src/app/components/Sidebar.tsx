@@ -42,6 +42,12 @@ const Icon = {
       <path d="M18 6 6 18M6 6l12 12" />
     </svg>
   ),
+  User: (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width={18} height={18} aria-hidden="true" {...props}>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  ),
 };
 
 export const Sidebar = () => {
@@ -52,6 +58,7 @@ export const Sidebar = () => {
     { href: "/dashboard", label: "Dashboard", icon: <Icon.Home /> },
     { href: "/projects", label: "Projects", icon: <Icon.FolderKanban /> },
     { href: "/tickets", label: "Tickets", icon: <Icon.Ticket /> },
+    { href: "/profile", label: "Profile", icon: <Icon.User /> },
   ];
 
   return (
