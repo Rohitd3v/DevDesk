@@ -1,11 +1,11 @@
-import { Router } from "express";
-import { TicketController } from "../controllers/ticketController.js";
-import authMiddleware from "../middleware/Authmiddleware.js";
-import validate from "../middleware/validateRequest.js";
-import { createTicketSchema, updateTicketSchema } from "../validators/zodValidation.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import express, { Router } from "express";
+import { TicketController } from "../controllers/ticketController.ts";
+import authMiddleware from "../middleware/Authmiddleware.ts";
+import validate from "../middleware/validateRequest.ts";
+import { createTicketSchema, updateTicketSchema } from "../validators/zodValidation.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
 
-const router = Router();
+const router = express.Router();
 
 router.post(
   "/:project_id/tickets",

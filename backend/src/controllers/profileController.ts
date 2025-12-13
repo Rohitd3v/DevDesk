@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { sendResponse } from "../utils/sendResponse.js";
-import { ProfileService } from "../services/profileService.js";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
+import { sendResponse } from "../utils/sendResponse.ts";
+import { ProfileService } from "../services/profileService.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
 
 
 

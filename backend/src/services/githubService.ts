@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { supabase } from "../config/supabaseClient.js";
+import { supabase } from "../config/supabaseClient.ts";
 
 export interface GitHubRepo {
   id: number;
@@ -84,8 +84,8 @@ export class GitHubService {
         owner,
         repo,
         title,
-        body,
-        labels,
+        ...(body && { body }),
+        ...(labels && { labels }),
       });
       return data as GitHubIssue;
     } catch (error) {

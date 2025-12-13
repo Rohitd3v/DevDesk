@@ -1,15 +1,15 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import {
   initiateGitHubAuth,
   handleGitHubCallback,
   handleGitHubError,
   linkGitHubAccount,
   unlinkGitHubAccount,
-} from "../controllers/githubAuthController.js";
-import authMiddleware from "../middleware/Authmiddleware.js";
-import asyncHandler from "../utils/asyncHandler.js";
+} from "../controllers/githubAuthController.ts";
+import authMiddleware from "../middleware/Authmiddleware.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
 
-const router = Router();
+const router = express.Router();
 
 // GitHub OAuth routes
 router.get("/github", asyncHandler(initiateGitHubAuth));

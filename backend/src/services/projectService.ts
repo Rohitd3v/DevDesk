@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.js";
+import { supabase } from "../config/supabaseClient.ts";
 
 export const ProjectService = {
   getProjectsByUser: async (userId: string) => {

@@ -1,11 +1,11 @@
-import { Router } from "express"
-import authMiddleware from "../middleware/Authmiddleware.js";
-import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.js";
-import asyncHandler from "../utils/asyncHandler.js";
-import validate from "../middleware/validateRequest.js";
-import { createProjectSchema, updateProjectSchema } from "../validators/zodValidation.js";
+import express, { Router } from "express";
+import authMiddleware from "../middleware/Authmiddleware.ts";
+import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
+import validate from "../middleware/validateRequest.ts";
+import { createProjectSchema, updateProjectSchema } from "../validators/zodValidation.ts";
 
-const router = Router();
+const router = express.Router();
 
 router.get('/', authMiddleware, asyncHandler(getprojectbyUser))
 router.get('/:P_id', authMiddleware, asyncHandler(getProjectsbyId))

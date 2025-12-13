@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import type { ZodTypeAny } from "zod";
-import { sendResponse } from "../utils/sendResponse.js";
+import { sendResponse } from "../utils/sendResponse.ts";
 
 interface ValidationSchemas {
   params?: ZodTypeAny;

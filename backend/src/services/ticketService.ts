@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.js";
+import { supabase } from "../config/supabaseClient.ts";
 
 export const TicketService = {
   getProjectById: async (project_id: string, userId: string) => {

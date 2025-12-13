@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { STATUS, PRIORITY } from "../types/ticketTypes.js";
+import { STATUS, PRIORITY } from "../types/ticketTypes.ts";
 
 export const signUpSchema = z.object({
   email: z.email({ message: "Invalid email address" }),
