@@ -1,17 +1,17 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import {
   getUserGitHubRepos,
   linkRepoToProject,
   getProjectLinkedRepos,
   unlinkRepoFromProject,
   getGitHubConnectionStatus,
-} from "../controllers/githubRepoController.js";
-import authMiddleware from "../middleware/Authmiddleware.js";
-import validate from "../middleware/validateRequest.js";
-import { linkRepoSchema, projectParamsSchema, repoParamsSchema } from "../validators/githubValidation.js";
-import asyncHandler from "../utils/asyncHandler.js";
+} from "../controllers/githubRepoController.ts";
+import authMiddleware from "../middleware/Authmiddleware.ts";
+import validate from "../middleware/validateRequest.ts";
+import { linkRepoSchema, projectParamsSchema, repoParamsSchema } from "../validators/githubValidation.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
 
-const router = Router();
+const router = express.Router();
 
 // All routes require authentication
 router.use(authMiddleware);

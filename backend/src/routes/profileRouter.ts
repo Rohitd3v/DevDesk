@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { CreateProfile, getProfile, getProfilebyId, updateProfie, deleteProfile } from "../controllers/profileController.js";
-import Authmiddleware from "../middleware/Authmiddleware.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import express, { Router } from "express";
+import { CreateProfile, getProfile, getProfilebyId, updateProfie, deleteProfile } from "../controllers/profileController.ts";
+import Authmiddleware from "../middleware/Authmiddleware.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
 
-const router = Router();
+const router = express.Router();
 
 router.post('/', Authmiddleware, asyncHandler(CreateProfile))
 router.get('/', asyncHandler(getProfile))

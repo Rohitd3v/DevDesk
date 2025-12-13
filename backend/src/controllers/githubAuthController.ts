@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-import passport from "../config/passport.js";
-import { supabaseAuth } from "../config/supabaseClient.js";
-import { sendResponse } from "../utils/sendResponse.js";
+import passport from "../config/passport.ts";
+import { supabaseAuth } from "../config/supabaseClient.ts";
+import { sendResponse } from "../utils/sendResponse.ts";
 
 // Initiate GitHub OAuth
 export const initiateGitHubAuth = (req: Request, res: Response, next: NextFunction) => {

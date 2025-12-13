@@ -1,6 +1,6 @@
-import { sendResponse } from "../utils/sendResponse.js";
-import { ProjectService } from "../services/projectService.js";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
+import { sendResponse } from "../utils/sendResponse.ts";
+import { ProjectService } from "../services/projectService.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
 import type { Response } from "express";
 
 
