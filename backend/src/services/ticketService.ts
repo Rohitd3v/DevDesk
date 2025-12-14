@@ -1,5 +1,5 @@
+import { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.ts";
 import { supabase } from "../config/supabaseClient.ts";
-import { TicketCreateBody } from "../types/ticketTypes.ts";
 
 export const TicketService = {
   createTicket: async (ticket: TicketCreateBody) => {
@@ -14,7 +14,6 @@ export const TicketService = {
     return supabase.from("tickets").select("*").eq("id", ticket_id).single();
   },
 
-import { TicketUpdateBody } from "../types/ticketTypes.ts";
   updateTicket: async (ticket_id: string, updateData: TicketUpdateBody) => {
     return supabase
       .from("tickets")

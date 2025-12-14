@@ -6,6 +6,7 @@ import type {
   TicketUpdateBody,
 } from "../types/ticketTypes.ts";
 import { TicketService } from "../services/ticketService.ts";
+import { ProjectService } from "../services/projectService.ts";
 
 export const TicketController = {
   create: async (req: AuthenticatedRequest, res: Response) => {
@@ -24,22 +25,27 @@ export const TicketController = {
     if (!project_id)
       return sendResponse(res, 400, false, { error: "Project ID is required" });
 
-    const { data: project } = await TicketService.getProjectById(
+    const { data: project } = await ProjectService.getProjectById(
       project_id,
       userId,
     );
     if (!project)
       return sendResponse(res, 404, false, { error: "Project not found" });
 
-    const { data, error } = await TicketService.createTicket({
+    const ticketData: TicketCreateBody = {
       project_id,
       title,
       description,
       status,
       priority,
       created_by: userId,
-      assigned_to,
-    });
+    };
+
+    if (assigned_to !== undefined) {
+      ticketData.assigned_to = assigned_to;
+    }
+
+    const { data, error } = await TicketService.createTicket(ticketData);
 
     if (error) return sendResponse(res, 500, false, { error: error.message });
     return sendResponse(res, 201, true, { ticket: data });
@@ -54,7 +60,7 @@ export const TicketController = {
     if (!project_id)
       return sendResponse(res, 400, false, { error: "Project ID is required" });
 
-    const { data: project } = await TicketService.getProjectById(
+    const { data: project } = await ProjectService.getProjectById(
       project_id,
       userId,
     );
@@ -81,7 +87,7 @@ export const TicketController = {
     if (!ticket)
       return sendResponse(res, 404, false, { error: "Ticket not found" });
 
-    const { data: project } = await TicketService.getProjectById(
+    const { data: project } = await ProjectService.getProjectById(
       ticket.project_id,
       userId,
     );
@@ -105,7 +111,7 @@ export const TicketController = {
     if (!ticket)
       return sendResponse(res, 404, false, { error: "Ticket not found" });
 
-    const { data: project } = await TicketService.getProjectById(
+    const { data: project } = await ProjectService.getProjectById(
       ticket.project_id,
       userId,
     );
@@ -144,7 +150,7 @@ export const TicketController = {
     if (!ticket)
       return sendResponse(res, 404, false, { error: "Ticket not found" });
 
-    const { data: project } = await TicketService.getProjectById(
+    const { data: project } = await ProjectService.getProjectById(
       ticket.project_id,
       userId,
     );
