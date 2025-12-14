@@ -39,6 +39,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+import notificationRouter from "./routes/notificationRouter.ts";
+
 // Routes
 app.use("/api/v1/auth", authRouters);
 app.use("/api/v1/auth", githubAuthRouter);
@@ -48,6 +50,7 @@ app.use("/api/v1/ticket", ticketsRouter);
 app.use("/api/v1/ticketcomment", ticketcommentsRouter);
 app.use("/api/v1/ticketAction", ticketActionRouter);
 app.use("/api/v1/github", githubRepoRouter);
+app.use("/api/v1/notifications", notificationRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>

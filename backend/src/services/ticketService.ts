@@ -1,16 +1,8 @@
+import type { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.ts";
 import { supabase } from "../config/supabaseClient.ts";
 
 export const TicketService = {
-  getProjectById: async (project_id: string, userId: string) => {
-    return supabase
-      .from("projects")
-      .select("id")
-      .eq("id", project_id)
-      .eq("owner_id", userId)
-      .single();
-  },
-
-  createTicket: async (ticket: any) => {
+  createTicket: async (ticket: TicketCreateBody) => {
     return supabase.from("tickets").insert([ticket]).select("*").single();
   },
 
@@ -22,10 +14,10 @@ export const TicketService = {
     return supabase.from("tickets").select("*").eq("id", ticket_id).single();
   },
 
-  updateTicket: async (ticket_id: string, updateData: any) => {
+  updateTicket: async (ticket_id: string, updateData: TicketUpdateBody) => {
     return supabase
       .from("tickets")
-      .update(updateData)
+      .update({ ...updateData, updated_at: new Date().toISOString() })
       .eq("id", ticket_id)
       .select("*")
       .single();
