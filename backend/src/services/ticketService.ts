@@ -1,4 +1,4 @@
-import { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.ts";
+import type { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.ts";
 import { supabase } from "../config/supabaseClient.ts";
 
 export const TicketService = {
