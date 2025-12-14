@@ -53,14 +53,24 @@ if (GITHUB_CLIENT_ID && GITHUB_CLIENT_SECRET) {
           }
 
           // Check if user exists in Supabase by email
-          let { data: existingUser, error: getUserError } = await supabaseAuth.auth.admin.listUsers();
-          
-          if (getUserError) {
-            console.error("Error fetching users:", getUserError);
-            return done(getUserError, null);
+          const { data: userId, error: rpcError } = await supabaseAuth.rpc('get_user_id_by_email', {
+            user_email: githubEmail,
+          });
+
+          if (rpcError) {
+            console.error('Error calling RPC function:', rpcError);
+            return done(rpcError, null);
           }
 
-          let user = existingUser.users.find(u => u.email === githubEmail);
+          let user;
+          if (userId) {
+            const { data: userData, error: userError } = await supabaseAuth.auth.admin.getUserById(userId);
+            if (userError) {
+              console.error('Error fetching user by ID:', userError);
+              return done(userError, null);
+            }
+            user = userData.user;
+          }
 
           if (!user) {
             // Create new user in Supabase
