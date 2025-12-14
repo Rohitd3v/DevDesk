@@ -5,13 +5,14 @@ interface Profile {
   full_name?: string;
   avatar_url?: string;
   role?: string;
+  suspended?: boolean;
 }
 
 export const ProfileService = {
   getProfileById: async (profileId: string) => {
     return supabase
       .from("profiles")
-      .select("id, username, full_name, avatar_url, role")
+      .select("id, username, full_name, avatar_url, role, suspended, created_at")
       .eq("id", profileId)
       .single();
   },
@@ -19,7 +20,7 @@ export const ProfileService = {
   getAllProfiles: async () => {
     return supabase
       .from("profiles")
-      .select("id, username, full_name, avatar_url, role");
+      .select("id, username, full_name, avatar_url, role, suspended, created_at");
   },
   
   createProfile: async (userId: string, profile: Profile) => {
