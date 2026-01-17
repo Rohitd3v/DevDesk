@@ -60,3 +60,7 @@ export const activityParamsSchema = z.object({
   ticket_id: z.string().uuid({ message: "Invalid ticket ID" }),
   activity_id: z.string().uuid({ message: "Invalid activity ID" }),
 });
+
+export const projectParamsSchema = z.object({
+  project_id: z.string().uuid({ message: "Invalid project ID" }),
+});

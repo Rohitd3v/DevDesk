@@ -23,19 +23,28 @@ router.get("/connection", asyncHandler(getGitHubConnectionStatus));
 router.get("/repositories", asyncHandler(getUserGitHubRepos));
 
 // Project-specific repository management
-router.get("/projects/:project_id/repositories", 
-  validate({ params: projectParamsSchema }), 
+router.get("/projects/:project_id/repositories",
+  validate({ params: projectParamsSchema }),
   asyncHandler(getProjectLinkedRepos)
 );
 
-router.post("/projects/:project_id/repositories", 
-  validate({ params: projectParamsSchema, body: linkRepoSchema }), 
+router.post("/projects/:project_id/repositories",
+  validate({ params: projectParamsSchema, body: linkRepoSchema }),
   asyncHandler(linkRepoToProject)
 );
 
-router.delete("/projects/:project_id/repositories/:repo_id", 
-  validate({ params: repoParamsSchema }), 
+router.delete("/projects/:project_id/repositories/:repo_id",
+  validate({ params: repoParamsSchema }),
   asyncHandler(unlinkRepoFromProject)
+);
+
+// Ticket sync status
+import { getTicketSyncStatus } from "../controllers/githubRepoController.ts";
+import { ticketParamsSchema } from "../validators/zodValidation.ts";
+
+router.get("/tickets/:ticket_id/sync",
+  validate({ params: ticketParamsSchema }),
+  asyncHandler(getTicketSyncStatus)
 );
 
 export default router;

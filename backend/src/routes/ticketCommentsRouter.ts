@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/:ticket_id', authMiddleware, validate({ params: ticketParamsSchema, body: createCommentSchema }), asyncHandler(createComment));
 router.get('/:ticket_id', authMiddleware, validate({ params: ticketParamsSchema }), asyncHandler(getcommentbyticketId));
-router.get('/:ticket_id/user', authMiddleware, validate({ params: ticketParamsSchema }), asyncHandler(getallCommentbyUserId));
+router.get('/:ticket_id/my-comments', authMiddleware, validate({ params: ticketParamsSchema }), asyncHandler(getallCommentbyUserId));
 router.delete('/:ticket_id/:comment_id', authMiddleware, validate({ params: commentParamsSchema }), asyncHandler(DeleteCommentbyId));
 
 export default router;

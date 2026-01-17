@@ -13,15 +13,14 @@ export const getprojectbyUser = async (req: AuthenticatedRequest, res: Response)
   const { data, error } = await ProjectService.getProjectsByUser(userId);
 
   if (error) return sendResponse(res, 500, false, { error: error.message });
-  if (!data || data.length === 0) return sendResponse(res, 404, false, { error: "No projects found" });
 
-  return sendResponse(res, 200, true, { projects: data });
+  return sendResponse(res, 200, true, { projects: data || [] });
 };
 
 // Fetch project details
 export const getProjectsbyId = async (req: AuthenticatedRequest, res: Response) => {
   const userId = req.user?.id;
-  const projectId = req.params.P_id;
+  const projectId = req.params.project_id;
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
   if (!projectId) return sendResponse(res, 400, false, { error: "Project ID is required" });
 
@@ -51,7 +50,7 @@ export const creatProject = async (req: AuthenticatedRequest, res: Response) => 
 
 export const updateProject = async (req: AuthenticatedRequest, res: Response) => {
   const userId = req.user?.id;
-  const project_id = req.params.P_id;
+  const project_id = req.params.project_id;
   const { name, description } = req.body;
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" })
   if (!project_id) return sendResponse(res, 400, false, { error: "Project ID is required" });
@@ -65,7 +64,7 @@ export const updateProject = async (req: AuthenticatedRequest, res: Response) =>
 // Delete project
 export const deleteProject = async (req: AuthenticatedRequest, res: Response) => {
   const userId = req.user?.id;
-  const projectId = req.params.P_id;
+  const projectId = req.params.project_id;
 
   if (!userId) return sendResponse(res, 401, false, { error: "Unauthorized" });
   if (!projectId) return sendResponse(res, 400, false, { error: "Project ID is required" });

@@ -77,11 +77,17 @@ export const GitHubService = {
   initiateGitHubAuth(redirectUrl?: string): void {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:3000';
     const authUrl = `${backendUrl}/api/v1/auth/github`;
-    
+
     if (redirectUrl) {
       window.location.href = `${authUrl}?redirect=${encodeURIComponent(redirectUrl)}`;
     } else {
       window.location.href = authUrl;
     }
+  },
+
+  // Get ticket sync status
+  async getTicketSyncStatus(ticketId: string): Promise<{ synced: boolean; sync_data?: any }> {
+    const { data } = await apiClient.get(`/github/tickets/${ticketId}/sync`);
+    return data;
   },
 };
