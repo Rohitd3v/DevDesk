@@ -1,6 +1,6 @@
-import type { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.ts";
-import { supabase } from "../config/supabaseClient.ts";
-import { GitHubRepoService, GitHubSyncService, GitHubService, GitHubTokenService } from "./githubService.ts";
+import type { TicketCreateBody, TicketUpdateBody } from "../types/ticketTypes.js";
+import { supabase } from "../config/supabaseClient.js";
+import { GitHubRepoService, GitHubSyncService, GitHubService, GitHubTokenService } from "./githubService.js";
 
 export const TicketService = {
   createTicket: async (ticket: TicketCreateBody) => {

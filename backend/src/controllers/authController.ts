@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { AuthService } from "../services/authService.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { AuthService } from "../services/authService.js";
 
 
 const signUp = async (req: Request, res: Response) => {

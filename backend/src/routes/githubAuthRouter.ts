@@ -5,9 +5,9 @@ import {
   handleGitHubError,
   linkGitHubAccount,
   unlinkGitHubAccount,
-} from "../controllers/githubAuthController.ts";
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
+} from "../controllers/githubAuthController.js";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
-import { supabase } from "../config/supabaseClient.ts";
+import { supabase } from "../config/supabaseClient.js";
 
-import { GitHubSyncService, GitHubService, GitHubTokenService } from "./githubService.ts";
+import { GitHubSyncService, GitHubService, GitHubTokenService } from "./githubService.js";
 
 export const TicketCommentService = {
   createComment: async (ticket_id: string, author_id: string, content: string) => {

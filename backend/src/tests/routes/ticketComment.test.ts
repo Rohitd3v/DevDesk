@@ -1,7 +1,7 @@
 import request from 'supertest';
-import { createTestApp, testFixtures, mockUser, generateUUID } from '../utils/testHelpers.ts';
-import { supabaseAuth } from '../../config/supabaseClient.ts';
-import { supabase } from '../../config/supabaseClient.ts';
+import { createTestApp, testFixtures, mockUser, generateUUID } from '../utils/testHelpers.js';
+import { supabaseAuth } from '../../config/supabaseClient.js';
+import { supabase } from '../../config/supabaseClient.js';
 
 // Mock Supabase
 jest.mock('../../config/supabaseClient.ts', () => ({

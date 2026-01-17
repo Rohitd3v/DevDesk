@@ -2,16 +2,16 @@ import type { Express } from 'express';
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
-import passport from '../../config/passport.ts';
-import authRouters from '../../routes/authRouter.ts';
-import authProfiles from '../../routes/profileRouter.ts';
-import authprojects from '../../routes/projectsRouter.ts';
-import ticketsRouter from '../../routes/ticketsRouter.ts';
-import ticketcommentsRouter from '../../routes/ticketCommentsRouter.ts';
-import ticketActionRouter from '../../routes/ticketActivityRouter.ts';
-import githubAuthRouter from '../../routes/githubAuthRouter.ts';
-import githubRepoRouter from '../../routes/githubRepoRouter.ts';
-import notificationRouter from '../../routes/notificationRouter.ts';
+import passport from '../../config/passport.js';
+import authRouters from '../../routes/authRouter.js';
+import authProfiles from '../../routes/profileRouter.js';
+import authprojects from '../../routes/projectsRouter.js';
+import ticketsRouter from '../../routes/ticketsRouter.js';
+import ticketcommentsRouter from '../../routes/ticketCommentsRouter.js';
+import ticketActionRouter from '../../routes/ticketActivityRouter.js';
+import githubAuthRouter from '../../routes/githubAuthRouter.js';
+import githubRepoRouter from '../../routes/githubRepoRouter.js';
+import notificationRouter from '../../routes/notificationRouter.js';
 
 // Mock user data for testing
 export const mockUser = {

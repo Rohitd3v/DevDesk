@@ -1,7 +1,7 @@
 import type { Response } from "express";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { TicketCommentService } from "../services/ticketCommentService.ts";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { TicketCommentService } from "../services/ticketCommentService.js";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 
 
 export const createComment = async (req: AuthenticatedRequest, res: Response) => {

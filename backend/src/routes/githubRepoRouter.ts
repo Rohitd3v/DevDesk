@@ -5,11 +5,11 @@ import {
   getProjectLinkedRepos,
   unlinkRepoFromProject,
   getGitHubConnectionStatus,
-} from "../controllers/githubRepoController.ts";
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import validate from "../middleware/validateRequest.ts";
-import { linkRepoSchema, projectParamsSchema, repoParamsSchema } from "../validators/githubValidation.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
+} from "../controllers/githubRepoController.js";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import validate from "../middleware/validateRequest.js";
+import { linkRepoSchema, projectParamsSchema, repoParamsSchema } from "../validators/githubValidation.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
 const router = express.Router();
 
@@ -39,8 +39,8 @@ router.delete("/projects/:project_id/repositories/:repo_id",
 );
 
 // Ticket sync status
-import { getTicketSyncStatus } from "../controllers/githubRepoController.ts";
-import { ticketParamsSchema } from "../validators/zodValidation.ts";
+import { getTicketSyncStatus } from "../controllers/githubRepoController.js";
+import { ticketParamsSchema } from "../validators/zodValidation.js";
 
 router.get("/tickets/:ticket_id/sync",
   validate({ params: ticketParamsSchema }),

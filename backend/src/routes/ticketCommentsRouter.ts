@@ -1,9 +1,9 @@
 import express, { Router } from "express";
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import { createComment, getcommentbyticketId, getallCommentbyUserId, DeleteCommentbyId, } from "../controllers/ticketCommentController.ts";
-import validate from "../middleware/validateRequest.ts";
-import { createCommentSchema, ticketParamsSchema, commentParamsSchema } from "../validators/zodValidation.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import { createComment, getcommentbyticketId, getallCommentbyUserId, DeleteCommentbyId, } from "../controllers/ticketCommentController.js";
+import validate from "../middleware/validateRequest.js";
+import { createCommentSchema, ticketParamsSchema, commentParamsSchema } from "../validators/zodValidation.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
 const router = express.Router();
 

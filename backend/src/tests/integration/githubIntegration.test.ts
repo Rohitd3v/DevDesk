@@ -1,5 +1,5 @@
 import request from "supertest";
-import { GitHubSyncService } from "../../services/githubService.ts";
+import { GitHubSyncService } from "../../services/githubService.js";
 
 // Define mocks globaly so we can access them in tests
 const mockGetUser = jest.fn();

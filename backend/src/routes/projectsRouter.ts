@@ -1,9 +1,9 @@
 import express, { Router } from "express";
-import authMiddleware from "../middleware/Authmiddleware.ts";
-import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
-import validate from "../middleware/validateRequest.ts";
-import { createProjectSchema, updateProjectSchema, projectParamsSchema } from "../validators/zodValidation.ts";
+import authMiddleware from "../middleware/Authmiddleware.js";
+import { getprojectbyUser, getProjectsbyId, creatProject, updateProject, deleteProject } from "../controllers/projectController.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import validate from "../middleware/validateRequest.js";
+import { createProjectSchema, updateProjectSchema, projectParamsSchema } from "../validators/zodValidation.js";
 
 const router = express.Router();
 

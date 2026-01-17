@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { supabase } from "../config/supabaseClient.ts";
+import { supabase } from "../config/supabaseClient.js";
 
 export interface GitHubRepo {
   id: number;

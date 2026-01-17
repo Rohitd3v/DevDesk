@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.ts";
+import { supabase } from "../config/supabaseClient.js";
 
 export const NotificationService = {
   getNotificationsByUser: async (userId: string) => {
