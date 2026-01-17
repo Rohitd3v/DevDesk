@@ -21,11 +21,11 @@ function ProjectDetailContent() {
   const params = useParams();
   const router = useRouter();
   const projectId = params.id as string;
-  
+
   const [project, setProject] = useState<Project | null>(null);
   const [projectLoading, setProjectLoading] = useState(true);
   const [projectError, setProjectError] = useState<string | null>(null);
-  
+
   const { tickets, loading: ticketsLoading, error: ticketsError, addTicket } = useTickets(projectId);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function ProjectDetailContent() {
         setProjectLoading(true);
         const data = await getProjectById(projectId);
         setProject(data.project);
-      } catch (error: any) {
+      } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
         setProjectError(error.response?.data?.error || "Failed to load project");
         if (error.response?.status === 404) {
           router.push("/projects");
@@ -87,7 +87,7 @@ function ProjectDetailContent() {
           <span className="mx-2">/</span>
           <span>{project.name}</span>
         </nav>
-        
+
         <div className="bg-white rounded-xl border p-6 shadow-sm">
           <h1 className="text-3xl font-bold mb-2">{project.name}</h1>
           <p className="text-gray-700 mb-4">{project.description}</p>

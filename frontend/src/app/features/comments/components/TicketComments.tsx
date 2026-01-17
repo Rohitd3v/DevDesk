@@ -22,7 +22,7 @@ export const TicketComments = ({ ticketId }: TicketCommentsProps) => {
       setSubmitting(true);
       await addComment(newComment.trim());
       setNewComment("");
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       console.error("Failed to add comment:", error);
     } finally {
       setSubmitting(false);
@@ -34,7 +34,7 @@ export const TicketComments = ({ ticketId }: TicketCommentsProps) => {
 
     try {
       await removeComment(commentId);
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       console.error("Failed to delete comment:", error);
     }
   };

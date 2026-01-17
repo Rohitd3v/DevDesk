@@ -41,7 +41,7 @@ function ProfileContent() {
           avatar_url: data.data.avatar_url || "",
           role: data.data.role || "",
         });
-      } catch (error: any) {
+      } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
         if (error.response?.status === 404) {
           // Profile doesn't exist yet
           setProfile(null);
@@ -72,7 +72,7 @@ function ProfileContent() {
         setProfile(data.data);
       }
       setEditing(false);
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       setError(error.response?.data?.error || "Failed to save profile");
     } finally {
       setLoading(false);
@@ -199,10 +199,11 @@ function ProfileContent() {
               </button>
             </div>
           </form>
-        ) : (
+        ) : profile ? (
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               {profile.avatar_url && (
+                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={profile.avatar_url}
                   alt="Avatar"
@@ -230,7 +231,7 @@ function ProfileContent() {
               )}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
 
       {/* GitHub Integration Section */}

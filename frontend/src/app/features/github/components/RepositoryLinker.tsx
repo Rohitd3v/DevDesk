@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useGitHubRepos, useProjectLinkedRepos } from "../hooks/useGitHubRepos";
+import { GitHubRepo } from "../services/githubService";
 import { useGitHubConnection } from "../hooks/useGitHubConnection";
 import { GitHubConnection } from "./GitHubConnection";
 
@@ -23,7 +24,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
     return <GitHubConnection />;
   }
 
-  const handleLinkRepository = async (repo: any) => {
+  const handleLinkRepository = async (repo: GitHubRepo) => {
     try {
       setLinking(repo.id);
       await linkRepository({
@@ -32,7 +33,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
         github_repo_id: repo.id,
       });
       setShowRepoSelector(false);
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       console.error("Failed to link repository:", error);
       alert(error.message || "Failed to link repository");
     } finally {
@@ -46,7 +47,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
     try {
       setUnlinking(repoId);
       await unlinkRepository(repoId);
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       console.error("Failed to unlink repository:", error);
       alert(error.message || "Failed to unlink repository");
     } finally {
@@ -167,7 +168,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
               ) : availableRepos.length === 0 ? (
                 <div className="text-center py-8 text-gray-600">
                   <p>No available repositories to link.</p>
-                  <p className="text-sm mt-1">All your repositories are already linked or you don't have any repositories.</p>
+                  <p className="text-sm mt-1">All your repositories are already linked or you don&apos;t have any repositories.</p>
                 </div>
               ) : (
                 <div className="space-y-2">
