@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-import asyncHandler from "../utils/asyncHandler.ts";
-import { NotificationService } from "../services/notificationService.ts";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
-import { sendResponse } from "../utils/sendResponse.ts";
+import asyncHandler from "../utils/asyncHandler.js";
+import { NotificationService } from "../services/notificationService.js";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
+import { sendResponse } from "../utils/sendResponse.js";
 
 export const getNotifications = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
   const userId = req.user?.id;

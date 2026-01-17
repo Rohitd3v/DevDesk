@@ -1,6 +1,6 @@
 import express from "express";
-import { handleWebhook } from "../controllers/githubWebhookController.ts";
-import asyncHandler from "../utils/asyncHandler.ts";
+import { handleWebhook } from "../controllers/githubWebhookController.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
 const router = express.Router();
 

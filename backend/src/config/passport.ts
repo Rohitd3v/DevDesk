@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
-import { supabaseAuth } from "./supabaseClient.ts";
-import { GitHubTokenService } from "../services/githubService.ts";
+import { supabaseAuth } from "./supabaseClient.js";
+import { GitHubTokenService } from "../services/githubService.js";
 import dotenv from "dotenv";
 
 dotenv.config();

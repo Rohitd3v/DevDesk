@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.ts";
+import { supabase } from "../config/supabaseClient.js";
 
 export const TicketActivityService = {
   createActivity: async (ticket_id: string, actor_id: string, action: string, details: object) => {

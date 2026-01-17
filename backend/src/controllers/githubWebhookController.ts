@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { GitHubRepoService, GitHubSyncService } from "../services/githubService.ts";
-import { TicketService } from "../services/ticketService.ts";
-import { TicketCommentService } from "../services/ticketCommentService.ts";
-import { supabase } from "../config/supabaseClient.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { GitHubRepoService, GitHubSyncService } from "../services/githubService.js";
+import { TicketService } from "../services/ticketService.js";
+import { TicketCommentService } from "../services/ticketCommentService.js";
+import { supabase } from "../config/supabaseClient.js";
 import crypto from 'crypto';
 
 // Verify GitHub webhook signature

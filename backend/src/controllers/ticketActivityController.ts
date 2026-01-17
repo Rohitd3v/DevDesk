@@ -1,7 +1,7 @@
-import { sendResponse } from "../utils/sendResponse.ts";
-import { TicketActivityService } from "../services/ticketActivityService.ts";
+import { sendResponse } from "../utils/sendResponse.js";
+import { TicketActivityService } from "../services/ticketActivityService.js";
 import type { Response } from "express";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
 /**
  * CREATE ticket activity */
 

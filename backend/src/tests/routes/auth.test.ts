@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { createTestApp, testFixtures } from '../utils/testHelpers.ts';
-import { AuthService } from '../../services/authService.ts';
+import { createTestApp, testFixtures } from '../utils/testHelpers.js';
+import { AuthService } from '../../services/authService.js';
 
 // Mock Supabase Auth Service
 jest.mock('../../services/authService.ts', () => ({

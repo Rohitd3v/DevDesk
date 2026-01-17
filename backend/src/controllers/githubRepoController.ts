@@ -1,8 +1,8 @@
 import type { Response } from "express";
-import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.ts";
-import { sendResponse } from "../utils/sendResponse.ts";
-import { GitHubService, GitHubTokenService, GitHubRepoService, GitHubSyncService } from "../services/githubService.ts";
-import { ProjectService } from "../services/projectService.ts";
+import type { AuthenticatedRequest } from "../types/AuthenticatedRequest.js";
+import { sendResponse } from "../utils/sendResponse.js";
+import { GitHubService, GitHubTokenService, GitHubRepoService, GitHubSyncService } from "../services/githubService.js";
+import { ProjectService } from "../services/projectService.js";
 
 // Get user's GitHub repositories
 export const getUserGitHubRepos = async (req: AuthenticatedRequest, res: Response) => {
