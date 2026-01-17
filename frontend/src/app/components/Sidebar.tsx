@@ -52,7 +52,7 @@ const Icon = {
 
 export const Sidebar = () => {
   const pathname = usePathname();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: <Icon.Home /> },
@@ -63,10 +63,18 @@ export const Sidebar = () => {
 
   return (
     <>
+      {/* Mobile Backdrop */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden transition-opacity"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
       {/* Toggle button (mobile only) */}
       <button
         onClick={() => setOpen(!open)}
-        className="absolute top-4 left-4 z-50 lg:hidden p-2 bg-white rounded-md shadow"
+        className="fixed top-4 left-4 z-50 lg:hidden p-2 bg-white rounded-md shadow hover:bg-gray-100 transition-colors"
       >
         {open ? <Icon.X /> : <Icon.Menu />}
       </button>
@@ -89,11 +97,10 @@ export const Sidebar = () => {
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <div
-                className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer ${
-                  pathname.startsWith(item.href)
-                    ? "bg-blue-100 text-blue-600 font-medium"
-                    : "hover:bg-gray-100"
-                }`}
+                className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer ${pathname.startsWith(item.href)
+                  ? "bg-blue-100 text-blue-600 font-medium"
+                  : "hover:bg-gray-100"
+                  }`}
               >
                 {item.icon}
                 {item.label}

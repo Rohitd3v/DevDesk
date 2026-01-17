@@ -28,7 +28,7 @@ export const SignupForm = () => {
         placeholder="Email"
         value={formData.email}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        className="w-full px-3 py-2 border rounded-xl text-black"
+        className="appearance-none block w-full px-4 py-3 border rounded-xl text-black text-base cursor-text placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
         required
       />
 
@@ -37,14 +37,14 @@ export const SignupForm = () => {
         placeholder="Password"
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        className="w-full px-3 py-2 border rounded-xl text-black"
+        className="appearance-none block w-full px-4 py-3 border rounded-xl text-black text-base cursor-text placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
         required
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 disabled:opacity-50"
+        className="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 active:scale-[0.98] transition-all disabled:opacity-50 disabled:active:scale-100"
       >
         {loading ? "Signing up..." : "Sign Up"}
       </button>

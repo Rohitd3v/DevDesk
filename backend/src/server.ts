@@ -41,6 +41,8 @@ app.use(passport.session());
 
 import notificationRouter from "./routes/notificationRouter.ts";
 
+import githubWebhookRouter from "./routes/githubWebhookRouter.ts";
+
 // Routes
 app.use("/api/v1/auth", authRouters);
 app.use("/api/v1/auth", githubAuthRouter);
@@ -50,11 +52,17 @@ app.use("/api/v1/ticket", ticketsRouter);
 app.use("/api/v1/ticketcomment", ticketcommentsRouter);
 app.use("/api/v1/ticketAction", ticketActionRouter);
 app.use("/api/v1/github", githubRepoRouter);
+app.use("/api/v1/webhooks/github", githubWebhookRouter);
 app.use("/api/v1/notifications", notificationRouter);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
-);
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () =>
+    console.log(`Server running on http://localhost:${PORT}`)
+  );
+}
+
+export default app;
 
 

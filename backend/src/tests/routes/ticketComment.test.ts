@@ -158,7 +158,7 @@ describe('Ticket Comment API', () => {
     });
   });
 
-  describe('GET /api/v1/ticketcomment/:ticket_id/user', () => {
+  describe('GET /api/v1/ticketcomment/:ticket_id/my-comments', () => {
     it('should get comments by user with valid auth', async () => {
       const ticketId = generateUUID();
       const mockComments = [
@@ -176,7 +176,7 @@ describe('Ticket Comment API', () => {
       mockFrom.mockReturnValue(mockChain);
 
       const response = await request(app)
-        .get(`/api/v1/ticketcomment/${ticketId}/user`)
+        .get(`/api/v1/ticketcomment/${ticketId}/my-comments`)
         .set('Authorization', `Bearer ${mockToken}`);
 
       expect(response.status).toBe(200);
@@ -185,7 +185,7 @@ describe('Ticket Comment API', () => {
     it('should reject request without auth token', async () => {
       const ticketId = generateUUID();
       const response = await request(app)
-        .get(`/api/v1/ticketcomment/${ticketId}/user`);
+        .get(`/api/v1/ticketcomment/${ticketId}/my-comments`);
 
       expect(response.status).toBe(401);
     });

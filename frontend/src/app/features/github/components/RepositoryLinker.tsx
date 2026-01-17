@@ -13,7 +13,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
   const { connectionStatus } = useGitHubConnection();
   const { repositories, loading: reposLoading, error: reposError, fetchRepositories } = useGitHubRepos();
   const { linkedRepos, loading: linkedLoading, linkRepository, unlinkRepository } = useProjectLinkedRepos(projectId);
-  
+
   const [showRepoSelector, setShowRepoSelector] = useState(false);
   const [linking, setLinking] = useState<number | null>(null);
   const [unlinking, setUnlinking] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
 
   const handleUnlinkRepository = async (repoId: string, repoName: string) => {
     if (!confirm(`Are you sure you want to unlink ${repoName}?`)) return;
-    
+
     try {
       setUnlinking(repoId);
       await unlinkRepository(repoId);
@@ -98,32 +98,33 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid gap-4">
           {linkedRepos.map((repo) => (
             <div key={repo.id} className="bg-white border rounded-lg p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-medium text-gray-900">{repo.full_name}</h4>
-                  <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
-                    <span>Branch: {repo.default_branch || 'main'}</span>
-                    {repo.html_url && (
-                      <a
-                        href={repo.html_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline"
-                      >
-                        View on GitHub →
-                      </a>
-                    )}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-gray-900 truncate">{repo.repo_name}</h3>
+                  <p className="text-gray-600 text-sm truncate">{repo.repo_owner}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-xs px-2 py-1 bg-gray-100 rounded text-gray-600">
+                      GitHub
+                    </span>
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 hover:underline flex items-center gap-1"
+                    >
+                      View Repo ↗
+                    </a>
                   </div>
                 </div>
                 <button
-                  onClick={() => handleUnlinkRepository(repo.id, repo.full_name)}
+                  onClick={() => handleUnlinkRepository(repo.id, repo.repo_name)}
                   disabled={unlinking === repo.id}
-                  className="px-3 py-1 text-red-600 hover:bg-red-50 rounded transition disabled:opacity-50"
+                  className="text-red-600 px-3 py-1 hover:bg-red-50 rounded transition text-sm disabled:opacity-50 whitespace-nowrap self-start sm:self-center"
                 >
-                  {unlinking === repo.id ? "Unlinking..." : "Unlink"}
+                  Unlink
                 </button>
               </div>
             </div>
@@ -133,8 +134,8 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
 
       {/* Repository Selector Modal */}
       {showRepoSelector && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Select Repository to Link</h3>
               <button
@@ -151,7 +152,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
               </div>
             )}
 
-            <div className="overflow-y-auto max-h-96">
+            <div className="overflow-y-auto flex-1">
               {reposLoading ? (
                 <div className="space-y-3">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -175,16 +176,15 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
                       key={repo.id}
                       className="border rounded-lg p-3 hover:bg-gray-50 transition"
                     >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-medium text-gray-900">{repo.full_name}</h4>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <h4 className="font-medium text-gray-900 truncate">{repo.full_name}</h4>
+                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 flex-wrap">
                             {repo.description && (
-                              <span className="truncate max-w-xs">{repo.description}</span>
+                              <span className="truncate max-w-[200px]">{repo.description}</span>
                             )}
-                            <span className={`px-2 py-1 rounded text-xs ${
-                              repo.private ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-                            }`}>
+                            <span className={`px-2 py-1 rounded text-xs ${repo.private ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+                              }`}>
                               {repo.private ? 'Private' : 'Public'}
                             </span>
                           </div>
@@ -192,7 +192,7 @@ export const RepositoryLinker = ({ projectId }: RepositoryLinkerProps) => {
                         <button
                           onClick={() => handleLinkRepository(repo)}
                           disabled={linking === repo.id}
-                          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition disabled:opacity-50"
+                          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition disabled:opacity-50 whitespace-nowrap self-start sm:self-center"
                         >
                           {linking === repo.id ? "Linking..." : "Link"}
                         </button>

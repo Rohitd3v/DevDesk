@@ -12,7 +12,7 @@ interface AppLayoutProps {
 export const AppLayout = ({ children }: AppLayoutProps) => {
   const { user, loading } = useAuth();
   const pathname = usePathname();
-  
+
   // Don't show sidebar on auth pages
   const isAuthPage = pathname === "/login" || pathname === "/signup" || pathname === "/";
   const showSidebar = !loading && user && !isAuthPage;
@@ -28,7 +28,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {showSidebar && <Sidebar />}
-      <main className={`flex-1 ${showSidebar ? "ml-64" : ""} ${isAuthPage ? "" : "p-6"}`}>
+      <main className={`flex-1 ${showSidebar ? "lg:ml-64" : ""} ${isAuthPage ? "" : "p-4 lg:p-6"}`}>
         {children}
       </main>
     </div>

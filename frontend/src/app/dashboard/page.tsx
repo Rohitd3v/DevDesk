@@ -29,17 +29,17 @@ function DashboardContent() {
 
   return (
     <div className="text-black">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Welcome back, {user?.email}</h1>
           <p className="text-gray-600">Here's what's happening with your projects</p>
         </div>
-        <span className="text-sm text-gray-600">{projects.length} projects</span>
+        <span className="text-sm text-gray-600 whitespace-nowrap">{projects.length} projects</span>
       </div>
 
       {projects.length === 0 ? (
         <div className="text-center py-12">
-          <div className="rounded-xl border border-dashed p-8 bg-white">
+          <div className="rounded-xl border border-dashed p-6 lg:p-8 bg-white">
             <h3 className="text-lg font-medium text-gray-900 mb-2">No projects yet</h3>
             <p className="text-gray-600 mb-4">Get started by creating your first project</p>
             <Link
