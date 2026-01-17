@@ -32,7 +32,7 @@ function DashboardContent() {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Welcome back, {user?.email}</h1>
-          <p className="text-gray-600">Here's what's happening with your projects</p>
+          <p className="text-gray-600">Here&apos;s what&apos;s happening with your projects</p>
         </div>
         <span className="text-sm text-gray-600 whitespace-nowrap">{projects.length} projects</span>
       </div>

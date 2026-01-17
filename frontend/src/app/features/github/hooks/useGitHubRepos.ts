@@ -39,7 +39,7 @@ export const useProjectLinkedRepos = (projectId: string) => {
 
   const fetchLinkedRepos = async () => {
     if (!projectId) return;
-    
+
     try {
       setLoading(true);
       setError(null);
@@ -86,6 +86,7 @@ export const useProjectLinkedRepos = (projectId: string) => {
 
   useEffect(() => {
     fetchLinkedRepos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   return {

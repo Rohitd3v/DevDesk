@@ -7,6 +7,7 @@ import { getStoredUser } from "../features/auth/services/authService";
 interface User {
   id: string;
   email: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       try {
         const token = localStorage.getItem("token");
         const storedUser = getStoredUser();
-        
+
         if (token && storedUser) {
           setUser(storedUser);
         } else {

@@ -86,7 +86,7 @@ export const GitHubService = {
   },
 
   // Get ticket sync status
-  async getTicketSyncStatus(ticketId: string): Promise<{ synced: boolean; sync_data?: any }> {
+  async getTicketSyncStatus(ticketId: string): Promise<{ synced: boolean; sync_data?: unknown }> {
     const { data } = await apiClient.get(`/github/tickets/${ticketId}/sync`);
     return data;
   },

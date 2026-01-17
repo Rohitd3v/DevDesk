@@ -58,6 +58,7 @@ export const GitHubConnection = ({ showDetails = true, className = "" }: GitHubC
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           {connectionStatus.avatar_url && (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={connectionStatus.avatar_url}
               alt="GitHub Avatar"
