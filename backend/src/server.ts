@@ -17,8 +17,37 @@ dotenv.config();
 const app = express();
 
 // CORS configuration
+// CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3001",
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      "http://localhost:3000",
+      "http://localhost:3001"
+    ];
+
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    // Check if origin is in the explicitly allowed list
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+
+    // Check for Vercel preview deployments
+    // Matches https://dev-desk-*-rohit8bitcoders-projects.vercel.app
+    const vercelPreviewPattern = /^https:\/\/dev-desk-.*-rohit8bitcoders-projects\.vercel\.app$/;
+    if (vercelPreviewPattern.test(origin)) {
+      return callback(null, true);
+    }
+
+    // Check for direct Vercel app domain if needed (optional, safer to stick to specific patterns)
+    // const vercelAppPattern = /\.vercel\.app$/;
+    // if (vercelAppPattern.test(origin)) return callback(null, true);
+
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
   credentials: true,
 }));
 
